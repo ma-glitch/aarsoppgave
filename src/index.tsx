@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <h1 className='pprodukter'>Populære produkter</h1>
     <App />
   </React.StrictMode>
 );

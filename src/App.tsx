@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
+
+interface ProduktData {
+  produktid: number;
+  navn: string;
+  pris: number;
+  bilde: string;
+}
 
 function App() {
+  const [data, setData] = useState<ProduktData[]>([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/server/produkter.php')
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <div className='produkter-index'>
+        {data.map(item => (
+          <div key={item.produktid}>
+            <div className='produkt-kort'>
+             <img className='produkt-bilde' src={item.bilde} alt="produkt bilde" />
+            <div className='produkt-info'>
+              <div className='produkt-navn'>{item.navn}</div>
+              <div className='produkt-pris'>{item.pris} KR</div>
+              <div className='produkt-kjønn'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget...</div>
+            </div>
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

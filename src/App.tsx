@@ -1,40 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Hjem from './pages/Hjem';
+import Produkter from './pages/produkter';
+import Nav from './components/Nav';
 
-interface ProduktData {
-  produktid: number;
-  navn: string;
-  pris: number;
-  bilde: string;
-}
-
-function App() {
-  const [data, setData] = useState<ProduktData[]>([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:8000/server/produkter.php')
-      .then(res => {
-        setData(res.data);
-      })
-      .catch(err => console.log(err));
-  }, []);
-
+const App: React.FC = () => {
   return (
-  <div className='produkter-index'>
-        {data.map(item => (
-          <div key={item.produktid}>
-            <div className='produkt-kort'>
-             <img className='produkt-bilde' src={item.bilde} alt="produkt bilde" />
-            <div className='produkt-info'>
-              <div className='produkt-navn'>{item.navn}</div>
-              <div className='produkt-pris'>{item.pris} KR</div>
-              <div className='produkt-kjønn'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget...</div>
-            </div>
-            </div>
-          </div>
-        ))}
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Hjem/>} />
+        <Route path="/produkter" element={<Produkter/>} />
+      </Routes>
+      
+    </Router>
   );
 }
 

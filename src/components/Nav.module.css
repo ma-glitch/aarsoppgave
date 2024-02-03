@@ -1,0 +1,37 @@
+.navbar{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-container {
+    margin-left: 80px;
+}
+
+.logo-container span{
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.links-container{
+    margin-right: 20px;
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
+}
+
+.links-container a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    padding: 14px 16px;
+}
+
+.links-container a:hover{
+    background-color: #7DC23B;
+    padding: 14px 16px;
+    border-radius: 10px;
+}

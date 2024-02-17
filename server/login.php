@@ -40,15 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if ($stmt->fetch()) {
                        
-                            session_start();
-
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["kundeid"] = $kundeid;
-                            $_SESSION["fornavn"] = $fornavn;
-                            $_SESSION["etternavn"] = $etternavn;
-                            $_SESSION["epost"] = $epost;
-                            $_SESSION["brukernavn"] = $username;
-                            $_SESSION["passord"] = $passord;
                             
 
                             echo json_encode(array(

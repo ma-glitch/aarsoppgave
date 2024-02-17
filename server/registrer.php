@@ -36,7 +36,7 @@ if (mysqli_num_rows($result) > 0) {
 $hashed_password = ($password);
 
 // Insert the user into the database
-$insert_query = "INSERT INTO kundeinfo (fornvavn, etternavn, epost, brukernavn, passord) VALUES ('$fornavn', '$etternavn', '$email', '$username', '$hashed_password')";
+$insert_query = "INSERT INTO kundeinfo (fornavn, etternavn, epost, brukernavn, passord) VALUES ('$fornavn', '$etternavn', '$email', '$username', '$hashed_password')";
 if (mysqli_query($conn, $insert_query)) {
     echo json_encode(["success" => true, "message" => "User registered successfully"]);
 } else {

@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loginform {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loginform input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding:14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.loginform button {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #7DC23B;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.loginform button:hover {
+  background-color: #008000;
+}
+
+.error {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+.response {
+  color: #008000;
+  margin-top: 10px;
+}
+
+.Ny {
+  margin-top: 20px;
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.link{
+  text-decoration: none;
+  color: #008000;
+  margin: 0.2rem;
+}
+
+
+
+
+.link:hover {
+  text-decoration: underline;
+}
+
+  

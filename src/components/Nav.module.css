@@ -8,18 +8,19 @@
 }
 
 .logo-container {
-    margin-left: 80px;
+    margin-left: 20px;
+   padding: 20px;
 }
 
-.logo-container span{
-    font-weight: 500;
-    cursor: pointer;
+.logo-container img{
+    width: 250px; 
+    height: auto;
 }
 
 .links-container{
     margin-right: 20px;
+    padding: 20px;
     display: flex;
-    width: 300px;
     justify-content: space-evenly;
 }
 

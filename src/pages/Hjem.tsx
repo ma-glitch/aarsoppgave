@@ -25,10 +25,11 @@ interface ProduktData {
     return (
     <div>
   
-  
+  <p className='populaare'>Populære produkter</p>
   
     <div className='produkter-index'>
           {data.map(item => (
+            
             <div key={item.produktid}>
               <div className='produkt-kort'>
                <img className='produkt-bilde' src={item.bilde} alt="produkt bilde" />

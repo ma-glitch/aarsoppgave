@@ -1,0 +1,82 @@
+
+
+.side-panel {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+  }
+
+.side-panel h3{
+    font-weight: bold;
+}
+  
+  .price-filters {
+    margin-bottom: 20px;
+  }
+  
+  .price-filters h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  .price-filters label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="checkbox"]{
+    accent-color: #7DC23B;
+    border: solid grey 2px;
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 0.65rem;
+  }
+
+  .color-filters {
+    margin-bottom: 20px;
+  }
+  
+  .color-filters h1 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .color-filters label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+
+  .kjonn-filters {
+    margin-bottom: 20px;
+  }
+  
+  .kjonn-filters h1 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .kjonn-filters label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+
+  .merke-filters {
+    margin-bottom: 20px;
+  }
+  
+  .merke-filters h1 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .merke-filters label {
+    display: block;
+    margin-bottom: 5px;
+  }

@@ -14,10 +14,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.loginform input {
+.loginform input,
+.loginform select {
   width: 100%;
   margin-bottom: 15px;
-  padding:14px 16px;
+  padding: 14px 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: Arial, Helvetica, sans-serif;
@@ -58,17 +59,12 @@
   color: black;
 }
 
-.link{
+.link {
   text-decoration: none;
   color: #008000;
   margin: 0.2rem;
 }
 
-
-
-
 .link:hover {
   text-decoration: underline;
 }
-
-  

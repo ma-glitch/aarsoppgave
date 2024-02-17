@@ -5,15 +5,10 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 
 require_once('config.php');
 
-$customerId = $_GET['customerId']; 
+$sql = "SELECT * FROM produkt WHERE rabatt > 0";
+$result = $conn->query($sql);
 
-$stmt = $conn->prepare("SELECT p.*, h.antall 
-                       FROM handlekurv h 
-                       JOIN produkt p ON h.produktid = p.produktid 
-                       WHERE h.kundeid = ?");
-$stmt->bind_param("s", $customerId);
-$stmt->execute();
-$result = $stmt->get_result();
+
 
 $data = array();
 
@@ -23,7 +18,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-$stmt->close();
+
 $conn->close();
 
 header('Content-Type: application/json');

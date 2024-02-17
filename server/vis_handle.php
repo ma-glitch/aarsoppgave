@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 
 require_once('config.php');
 
-$customerId = $_GET['customerId']; 
+$customerId = $_GET['customerId']; // Retrieve customerId from query parameter
 
 $stmt = $conn->prepare("SELECT p.*, h.antall 
                        FROM handlekurv h 

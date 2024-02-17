@@ -8,6 +8,8 @@ import { useCookies } from 'react-cookie';
 import MinSide from './pages/Minside';
 import RegistrationForm from './registrering';
 import Handlekurv from './pages/handlekurv';
+import Betaling from './pages/betaling';
+import Ansatt from './pages/Ansatt';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['Fornavn']);
@@ -23,6 +25,8 @@ const App: React.FC = () => {
         <Route path='/Handlekurv' element={<Handlekurv/>} />
         <Route path='/MinSide' element={<MinSide/>} />
         <Route path='/RegistrationForm' element={<RegistrationForm/>} />
+        <Route path='/betaling' element={<Betaling/>} />
+        <Route path='/Ansatt' element={<Ansatt/>} />
       </Routes>
       
     </Router>

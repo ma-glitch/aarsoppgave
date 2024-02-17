@@ -98,7 +98,7 @@ const Handlekurv: React.FC = () => {
             <Link to="/betaling">
                 <button className="checkout-button">Gå til betaling</button>
             </Link>
-            <Link to="/">
+            <Link to="/produkter">
                 <button className="back-button">Fortsett å handle</button>
             </Link>
         </div>

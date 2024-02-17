@@ -9,9 +9,18 @@ import logo from '../assets/png/logowhite_green.png';
 
 const Nav: React.FC<{}> = () => {
   const [cookies] = useCookies(['Fornavn']);
+  const [cookie] = useCookies(['Ansatt']);
   const username: string | undefined = cookies['Fornavn']; 
+  const ansatt: string | undefined = cookie['Ansatt']; 
 
   const renderUserInitial = () => {
+    if (ansatt === 'yes') {
+      return (
+        <div>
+          <Link to="/Ansatt">Ansatt</Link>
+        </div>
+      );
+   } else {
     if (username) {
       const initial = username.charAt(0).toUpperCase();
       return (
@@ -26,6 +35,7 @@ const Nav: React.FC<{}> = () => {
         </div>
       );
     }
+   }
   };
   
   return (

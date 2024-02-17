@@ -15,7 +15,7 @@ interface ProduktData {
     const [data, setData] = useState<ProduktData[]>([]);
   
     useEffect(() => {
-      axios.get('http://localhost:8000/server/produkter.php')
+      axios.get('http://localhost:8000/server/tilbud.php')
         .then(res => {
           setData(res.data);
         })
@@ -25,7 +25,7 @@ interface ProduktData {
     return (
     <div>
   
-  <p className='populaare'>Populære produkter</p>
+  <p className='populaare'>Produkter på tilbud</p>
   
     <div className='produkter-index'>
           {data.map(item => (

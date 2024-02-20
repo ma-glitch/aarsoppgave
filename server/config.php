@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 $servername = "localhost";
 $username = "root";
 $password = "Admin";
-$dbnavn = "mydb";
+$dbnavn = "SkoDex";
 
 
 $conn = new mysqli($servername, $username, $password, $dbnavn);

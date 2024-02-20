@@ -86,6 +86,12 @@ const Betaling: React.FC = () => {
     const handlePayment = async () => {
         try {
             const customerId = cookies['Kundeid'];
+
+            if (!selectedShippingOption || !address) {
+                return(
+                <p className='errorlevering'>Velg en leverings metode eller skriv in adresse for levering.</p>);
+            }
+
             const orderData = {
               customerId,
               shippingAddress: address,
@@ -203,7 +209,7 @@ const Betaling: React.FC = () => {
                 </div>
                 <div className="payment-section">
                     <Link to="/Takk">
-                    <button className="pay-now-button" onClick={handlePayment}>Fullfør Betaling</button>
+                    <button className="pay-now-button" onClick={handlePayment}   disabled={!selectedShippingOption || !address}>Fullfør Betaling</button>
                     </Link>
                 </div>
             </div>

@@ -2,12 +2,19 @@ import React, {useEffect, useState } from 'react';
 import './betaling.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom'; 
+
 
 
 interface ShippingOption {
     id: number;
     name: string;
     price: number;
+}
+
+interface PaymentOption {
+    id: number;
+    name: string;
 }
 
 interface Produkter {
@@ -24,6 +31,7 @@ const Betaling: React.FC = () => {
     const [data, setData] = useState<Produkter[]>([]);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
     const [selectedShippingOption, setSelectedShippingOption] = useState<ShippingOption | null>(null);
+    const [selectedPaymentOption, setSelectedPaymentOption] = useState<PaymentOption | null>(null);
 
     useEffect(() => {
         const getCartItems = async () => {
@@ -39,13 +47,18 @@ const Betaling: React.FC = () => {
         getCartItems();
     }, [cookies]);
 
-    const handlePaymentMethodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedPaymentMethod(event.target.value);
+    const handlePaymentMethodChange = (option: PaymentOption, event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedPaymentOption(option);
     };
+
+    const handlecardchange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedPaymentMethod(event.target.value);
+      };
 
     const handleShippingOptionChange = (option: ShippingOption) => {
         setSelectedShippingOption(option);
     };
+
 
 
     const handleRemoveItem = (productId: number) => {
@@ -77,7 +90,8 @@ const Betaling: React.FC = () => {
               customerId,
               shippingAddress: address,
               products: data.map(item => ({ produktid: item.produktid, antall: item.antall })),
-              shippingOption: selectedShippingOption
+              shippingOption: selectedShippingOption,
+              paymentvalg: selectedPaymentOption
             };
             await axios.post('http://localhost:8000/server/betaling.php', orderData);
             
@@ -112,23 +126,28 @@ const Betaling: React.FC = () => {
     
     return (
         <div className="checkout-container">
-            <h1>Checkout</h1>
+            <h1>Betaling</h1>
             <div className="shipping-section">
                 <h2>Delivery Method</h2>
                 <div className="shipping-options">
-                    <label>
-                        <input type="radio" name="shipping" checked={selectedShippingOption?.id === 1} onChange={() => handleShippingOptionChange({ id: 1, name: 'Hjemmelevering', price: 50 })} />
-                        Hjemmelevering (50)
-                    </label>
-                    <input type="text" name="adress" value={address} onChange={handleadresschange}/>
-                    <label>
-                        <input type="radio" name="shipping" checked={selectedShippingOption?.id === 2} onChange={() => handleShippingOptionChange({ id: 2, name: 'Prioritet Hjemmelevering', price: 150 })} />
-                        Prioritet Hjemmelevering (150)
-                    </label>
+                <label>
+            <input type="radio" name="shipping" checked={selectedShippingOption?.id === 1} onChange={() => handleShippingOptionChange({ id: 1, name: 'Hjemmelevering', price: 50 })} />
+            Hjemmelevering (50)
+        </label>
+        {selectedShippingOption?.id === 1 && (
+            <input placeholder='Leverlings adresse' type="text" name="adress" value={address} onChange={handleadresschange}/>
+        )}
+        <label>
+            <input type="radio" name="shipping" checked={selectedShippingOption?.id === 2} onChange={() => handleShippingOptionChange({ id: 2, name: 'Prioritet Hjemmelevering', price: 150 })} />
+            Prioritet Hjemmelevering (150)
+        </label>
+        {selectedShippingOption?.id === 2 && (
+            <input placeholder='Leverings adresse' type="text" name="adress" value={address} onChange={handleadresschange}/>
+        )}
                 </div>
             </div>
             <div className="cart-section">
-                <h2>Shopping Cart</h2>
+                <h2>Handlekurv</h2>
                 <ul className="cart-items">
                     {data.map(item => (
                         <li key={item.produktid}>
@@ -140,38 +159,52 @@ const Betaling: React.FC = () => {
                                 value={item.antall} 
                                 onChange={(e) => oppdaterantall(item.produktid, parseInt(e.target.value))}
                             /></div>
-                            <button onClick={() => handleRemoveItem(item.produktid)}>Remove</button>
+                            <button className='fjernbtn' onClick={() => handleRemoveItem(item.produktid)}>Fjern</button>
                         </li>
                     ))}
                 </ul>
                 <div className="total-price">Total: {totalpris}</div>
             </div>
             <div className="payment-section">
-                <h2>Payment Method</h2>
+                <h2>Betalings metode</h2>
                 <div className="payment-methods">
                     <label>
                         <input
                             type="radio"
                             name="paymentMethod"
                             value="creditCard"
-                            checked={selectedPaymentMethod === 'creditCard'}
-                            onChange={handlePaymentMethodChange}
+                            checked={selectedPaymentOption?.id === 1}
+                            onChange={(e) => handlePaymentMethodChange({id: 1, name: "bankkort" }, e)}
                         />
                         Credit Card
                     </label>
-                    <label>
+        {selectedPaymentOption?.id === 1 && (
+            <div>
+            <input placeholder='Kortnummer' type="text" name="kortnummer" onChange={handlecardchange}/>
+            <div className='sidebyside'>
+            <input placeholder='Sikkerhets kode' type="text" name="sikkerhetskode" onChange={handlecardchange}/>
+            <input placeholder='Dato' type="text" name="dato" onChange={handlecardchange}/>
+           </div>
+           </div> 
+        )}
+         <label>
                         <input
                             type="radio"
                             name="paymentMethod"
-                            value="paypal"
-                            checked={selectedPaymentMethod === 'paypal'}
-                            onChange={handlePaymentMethodChange}
+                            value="vipps"
+                            checked={selectedPaymentOption?.id === 2}
+                            onChange={(e) => handlePaymentMethodChange({id: 2, name: "vipps" }, e)}
                         />
                         PayPal
                     </label>
+        {selectedPaymentOption?.id === 2 && (
+            <input placeholder='Telefonnummer' type="text" name="adress" onChange={handlecardchange}/>
+        )}
                 </div>
                 <div className="payment-section">
-                    <button className="pay-now-button" onClick={handlePayment}>Pay Now</button>
+                    <Link to="/Takk">
+                    <button className="pay-now-button" onClick={handlePayment}>Fullfør Betaling</button>
+                    </Link>
                 </div>
             </div>
         </div>

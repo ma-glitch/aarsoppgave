@@ -10,6 +10,7 @@ import RegistrationForm from './registrering';
 import Handlekurv from './pages/handlekurv';
 import Betaling from './pages/betaling';
 import Ansatt from './pages/Ansatt';
+import Takk from './pages/takk';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['Fornavn']);
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Route path='/RegistrationForm' element={<RegistrationForm/>} />
         <Route path='/betaling' element={<Betaling/>} />
         <Route path='/Ansatt' element={<Ansatt/>} />
+        <Route path='/Takk' element={<Takk />} />
       </Routes>
       
     </Router>

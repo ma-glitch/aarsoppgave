@@ -7,7 +7,7 @@ require_once('config.php');
 
 $customerId = $_GET['customerId'];
 
-    $stmt = $conn->prepare("SELECT bestilling.bestillingsid, produkt_i_bestilling.antall, produkt.navn, produkt.bilde, produkt.pris, bestilling.dato, bestilling.levering_adresse, kundeinfo.fornavn
+    $stmt = $conn->prepare("SELECT bestilling.bestillingsid, produkt_i_bestilling.antall, produkt.navn, produkt.bilde, produkt.pris, bestilling.dato, bestilling.levering_adresse, kundeinfo.fornavn, kundeinfo.etternavn
     FROM bestilling
     INNER JOIN produkt_i_bestilling ON bestilling.bestillingsid = produkt_i_bestilling.bestillingsid
     INNER JOIN produkt ON produkt_i_bestilling.produktid = produkt.produktid

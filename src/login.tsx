@@ -12,7 +12,7 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
-  const [, setCookie] = useCookies(['Kundeid', 'Fornavn', 'Etternavn', 'Epost', 'Ansatt']);
+  const [, setCookie] = useCookies(['Loggedin', 'Kundeid', 'Fornavn', 'Etternavn', 'Epost', 'Ansatt']);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +37,10 @@ const LoginForm: React.FC = () => {
           password,
         });
         console.log(response);
-        const { kundeid, fornavn, etternavn, epost } = response.data;
+        const { kundeid, fornavn, etternavn, epost} = response.data;
         const ansatt = ' ';
         setResponseMessage(response.data.message);
+        setCookie('Loggedin', 'yes', { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Kundeid', kundeid, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Fornavn', fornavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Etternavn', etternavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
@@ -59,6 +60,7 @@ const LoginForm: React.FC = () => {
         const { kundeid, fornavn, etternavn, epost} = response.data;
         const ansatt = 'yes';
         setResponseMessage(response.data.message);
+        setCookie('Loggedin', 'yes', { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Kundeid', kundeid, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Fornavn', fornavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Etternavn', etternavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });

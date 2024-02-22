@@ -12,6 +12,7 @@ interface BestillData {
     levering_adresse: string;
     antall: number;
     fornavn: string;
+    etternavn: string;
 }
 
 const MinSide: React.FC = () => {
@@ -60,7 +61,7 @@ const MinSide: React.FC = () => {
                                         <h2>Ordre nummer: {item.bestillingsid}</h2>
                                     </div>
                                     <div className='Bestillinfo'>
-                                        <p className='navn'>Navn på bestilling: {item.fornavn}</p>
+                                        <p className='navn'>Navn på bestilling: {item.fornavn} {item.etternavn}</p>
                                         <p className='adresse'>Delivery Address: {item.levering_adresse}</p>
                                         <p><strong>Bestillings dato:</strong> {item.dato}</p>
                                     </div>

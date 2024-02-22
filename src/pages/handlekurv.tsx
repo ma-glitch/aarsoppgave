@@ -9,6 +9,7 @@ interface HandleData {
     navn: string;
     pris: number;
     antall: number;
+    rabatt: number;
 }
 
 const Handlekurv: React.FC = () => {
@@ -67,8 +68,30 @@ const Handlekurv: React.FC = () => {
     };
 
     const totalPrice = data.reduce((total, item) => {
-        return total + item.pris * item.antall;
+        return total + (Math.round(item.pris * (1 - item.rabatt))) * item.antall;
     }, 0);
+
+
+    const rabattregning = (handle: HandleData) => {
+        if (handle.rabatt > 0) {
+          const discountedPrice = Math.round((handle.pris * (1 - handle.rabatt)) * handle.antall);
+          return (
+            <div>
+              <p className='produkt-pris'>
+                <span style={{ textDecoration: 'line-through', color: 'red' }}>
+                  {handle.pris * handle.antall} KR
+                </span>
+                {' '}
+                {discountedPrice} KR ({handle.rabatt * 100}% rabatt)
+              </p>
+            </div>
+          );
+        } else {
+          return (
+            <p className='produkt-pris'>{handle.pris * handle.antall} KR</p>
+          );
+        }
+      }
 
 
     return (
@@ -79,7 +102,9 @@ const Handlekurv: React.FC = () => {
                 <div className="cart-item" key={handle.produktid}>
                     <div className="item-details">
                         <div className="item-name">{handle.navn}</div>
-                        <div className="item-price">{handle.antall * handle.pris} KR</div>
+                        <div className="rabatt">
+                        {rabattregning(handle)}
+                        </div>
                         <div className='quantity-container'>
                         <div className="item-quantity"><input
                                 type="number" 

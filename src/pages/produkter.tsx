@@ -3,6 +3,8 @@ import './produkter.css';
 import axios from 'axios';
 import SidePanel from './sidepanel';
 import { useCookies } from 'react-cookie';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface ProduktData {
@@ -13,12 +15,12 @@ interface ProduktData {
   kjonn: string;
   farge: string;
   merke: string;
+  rabatt: number;
 }
 
 const Produkter: React.FC = () => {
   const [data, setData] = useState<ProduktData[]>([]);
   const [filteredData, setFilteredData] = useState<ProduktData[]>([]);
-  const [cart, setCart] = useState<number[]>([]); 
   const [cookies] = useCookies(['Kundeid']);
 
   useEffect(() => {
@@ -79,13 +81,34 @@ const Produkter: React.FC = () => {
         quantity: 1,
       })
       .then(res => {
-        
+        toast.success("Lagt i Handlekurv!");
       })
       .catch(err => console.log(err));
     } else {
       console.log('Customer ID not found.');
     }
   };
+  
+  const rabattregning = (product: ProduktData) => {
+    if (product.rabatt > 0) {
+      const discountedPrice = Math.round(product.pris * (1 - product.rabatt));
+      return (
+        <div>
+          <p className='produkt-pris'>
+            <span style={{ textDecoration: 'line-through', color: 'red' }}>
+              {product.pris} KR
+            </span>
+            {' '}
+            {discountedPrice} KR ({product.rabatt * 100}% rabatt)
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <p className='produkt-pris'>{product.pris} KR</p>
+      );
+    }
+  }
 
   return (
     <div className="produkter">
@@ -97,7 +120,9 @@ const Produkter: React.FC = () => {
             <div className='produkt-info'>
               <div>
             <h3 className='produkt-navn'>{product.navn}</h3>
-            <p className='produkt-pris'>{product.pris} KR</p>
+            <div className='rabatt'>
+              {rabattregning(product)}
+            </div>
             <p className='produkt-kjonn'>Sko for {product.kjonn}</p>
             </div>
             <button onClick={() => addToCart(product.produktid)}>Legg i Handlekurv</button>
@@ -105,6 +130,14 @@ const Produkter: React.FC = () => {
           </div>
         ))}
       </div>
+      <ToastContainer position='top-center'
+      limit={10}
+      autoClose={5000}
+      newestOnTop
+      theme='colored'
+      closeOnClick
+      pauseOnHover
+      transition={Bounce} />
     </div>
   );
 }

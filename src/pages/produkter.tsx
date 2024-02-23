@@ -3,7 +3,7 @@ import './produkter.css';
 import axios from 'axios';
 import SidePanel from './sidepanel';
 import { useCookies } from 'react-cookie';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -49,6 +49,9 @@ const Produkter: React.FC = () => {
     if (filters.merke && filters.merke.length > 0) {
       filteredProducts = filteredProducts.filter(product => filters.merke.includes(product.merke));
     }
+    if (filters.rabatt && filters.rabatt.length > 0) {
+      filteredProducts = filteredProducts.filter(product => filters.rabatt.includes(getRabatt(product.rabatt)));
+    }
 
     setFilteredData(filteredProducts);
   };
@@ -64,6 +67,12 @@ const Produkter: React.FC = () => {
       return '1500-2000';
     } else if (price > 2000 && price <= 2500) {
       return '2000-2500';
+    }
+  };
+
+  const getRabatt = (rabatt: number) =>{
+    if (rabatt > 0.1){
+    return '0.1-1';
     }
   };
 
@@ -130,14 +139,6 @@ const Produkter: React.FC = () => {
           </div>
         ))}
       </div>
-      <ToastContainer position='top-center'
-      limit={10}
-      autoClose={5000}
-      newestOnTop
-      theme='colored'
-      closeOnClick
-      pauseOnHover
-      transition={Bounce} />
     </div>
   );
 }

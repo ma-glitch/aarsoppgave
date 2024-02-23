@@ -380,14 +380,6 @@ const Betaling: React.FC = () => {
           </button>
         </div>
       </div>
-      <ToastContainer position='top-center'
-      limit={10}
-      autoClose={5000}
-      newestOnTop
-      theme='colored'
-      closeOnClick
-      pauseOnHover
-      transition={Bounce} />
     </div>
   );
 };

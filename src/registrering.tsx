@@ -3,9 +3,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./registrering.css";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const RegistrationForm: React.FC = () => {
   const [username, setUsername] = useState('');
+  const [registered, setRegistered] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fornavn, setFornavn] = useState('');
@@ -25,7 +28,8 @@ const RegistrationForm: React.FC = () => {
         password,
       });
       setSuccessMessage(response.data.message);
-      
+
+      toast.success("refistrering fullført");
       navigate('/LoginForm');
     } catch (error) {
       setError('Failed to register. Please try again.');

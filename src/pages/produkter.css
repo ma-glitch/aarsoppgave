@@ -15,11 +15,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
 .produkt-kort {
+  cursor: pointer;
   width: 350px;
+  height: 450px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;

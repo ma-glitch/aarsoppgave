@@ -10,6 +10,7 @@ const SidePanel: React.FC<SidePanelProps> = ({ onFilterChange }) => {
   const [colorFilters, setColorFilters] = useState<string[]>([]);
   const [kjonnFilters, setKjonnFilters] = useState<string[]>([]);
   const [merkeFilters, setMerkeFilters] = useState<string[]>([]);
+  const [rabattFilters, setRabattFilters] = useState<string[]>([]);
 
   const handlePriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
@@ -47,9 +48,18 @@ const SidePanel: React.FC<SidePanelProps> = ({ onFilterChange }) => {
     }
   };
 
+  const handleRabattFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setRabattFilters(prevFilters => [...prevFilters, value]);
+    } else {
+      setRabattFilters(prevFilters => prevFilters.filter(filter => filter !== value));
+    }
+  };
+
   useEffect(() => {
-    onFilterChange({ price: priceFilters, color: colorFilters, kjonn: kjonnFilters, merke: merkeFilters });
-  }, [priceFilters, colorFilters, kjonnFilters, merkeFilters, onFilterChange]);
+    onFilterChange({ price: priceFilters, color: colorFilters, kjonn: kjonnFilters, merke: merkeFilters, rabatt: rabattFilters });
+  }, [priceFilters, colorFilters, kjonnFilters, merkeFilters, rabattFilters, onFilterChange]);
 
   return (
     <div className="side-panel">
@@ -210,9 +220,20 @@ const SidePanel: React.FC<SidePanelProps> = ({ onFilterChange }) => {
           />
           Dame
         </label>
-        
       </div>
-    </div>
+      <div className='Rabattfilter'>
+      <h3>Tilbud</h3>
+        <label>
+          <input
+            type="checkbox"
+            value="0.1-1"
+            checked={rabattFilters.includes('0.1-1')}
+            onChange={handleRabattFilterChange}
+          />
+          På tilbud
+        </label>
+      </div>
+      </div>
   );
 };
 

@@ -10,6 +10,7 @@ const LoginForm: React.FC = () => {
   const [userType, setUserType] = useState('user');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [error, setError] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [, setCookie] = useCookies(['Loggedin', 'Kundeid', 'Fornavn', 'Etternavn', 'Epost', 'Ansatt']);

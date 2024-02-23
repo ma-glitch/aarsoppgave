@@ -11,6 +11,8 @@ import Handlekurv from './pages/handlekurv';
 import Betaling from './pages/betaling';
 import Ansatt from './pages/Ansatt';
 import Takk from './pages/takk';
+import {Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['Fornavn']);
@@ -18,6 +20,14 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      <ToastContainer position='top-center'
+      limit={10}
+      autoClose={5000}
+      newestOnTop
+      theme='colored'
+      closeOnClick
+      pauseOnHover
+      transition={Bounce} />
        <Nav />
       <Routes>
         <Route path="/" element={<Hjem/>} />

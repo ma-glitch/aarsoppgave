@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 
 require_once('config.php');
 
-$sql = "SELECT * FROM produkt WHERE rabatt > 0 LIMIT 4";
+$sql = "SELECT * FROM produkt ORDER BY RAND() LIMIT 4";
 $result = $conn->query($sql);
 
 

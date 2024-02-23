@@ -90,7 +90,7 @@ const Produkter: React.FC = () => {
         quantity: 1,
       })
       .then(res => {
-        toast.success("Lagt i Handlekurv!");
+        toast.success("Lagt i Handlekurven!");
       })
       .catch(err => console.log(err));
     } else {
@@ -119,6 +119,14 @@ const Produkter: React.FC = () => {
     }
   }
 
+  const kjonnvis = (kjonn: string) => {
+    if (kjonn === 'mann'){
+      return 'Herre';
+    } else if (kjonn === 'dame'){
+      return 'Dame';
+    }
+  };
+
   return (
     <div className="produkter">
       <SidePanel onFilterChange={handleFilterChange} />
@@ -132,7 +140,7 @@ const Produkter: React.FC = () => {
             <div className='rabatt'>
               {rabattregning(product)}
             </div>
-            <p className='produkt-kjonn'>Sko for {product.kjonn}</p>
+            <p className='produkt-kjonn'>{kjonnvis(product.kjonn)}sko</p>
             </div>
             <button onClick={() => addToCart(product.produktid)}>Legg i Handlekurv</button>
             </div>

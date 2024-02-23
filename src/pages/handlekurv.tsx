@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 interface HandleData {
     produktid: number;
+    bilde:string;
     navn: string;
     pris: number;
     antall: number;
@@ -101,17 +102,22 @@ const Handlekurv: React.FC = () => {
             {data.map(handle => (
                 <div className="cart-item" key={handle.produktid}>
                     <div className="item-details">
-                        <div className="item-name">{handle.navn}</div>
-                        <div className="rabatt">
-                        {rabattregning(handle)}
-                        </div>
-                        <div className='quantity-container'>
-                        <div className="item-quantity"><input
-                                type="number" 
-                                min="0" 
-                                value={handle.antall} 
-                                onChange={(e) => updateQuantity(handle.produktid, parseInt(e.target.value))}
-                            /></div>
+                        <img src={handle.bilde} alt={handle.navn} />
+                        <div className="item-info">
+                            <div className="item-name">{handle.navn}</div>
+                            <div className="rabatt">
+                                {rabattregning(handle)}
+                            </div>
+                            <div className='quantity-container'>
+                                <div className="item-quantity">
+                                    <input
+                                        type="number" 
+                                        min="0" 
+                                        value={handle.antall} 
+                                        onChange={(e) => updateQuantity(handle.produktid, parseInt(e.target.value))}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button className="remove-button" onClick={() => removeItem(handle.produktid)}>Remove</button>
@@ -119,7 +125,7 @@ const Handlekurv: React.FC = () => {
             ))}
         </div>
         <div className="cart-summary">
-            <div className="total-price">Total:  {totalPrice} KR</div>
+            <div className="total-price">Total: {totalPrice} KR</div>
             <Link to="/betaling">
                 <button className="checkout-button">Gå til betaling</button>
             </Link>
@@ -128,6 +134,7 @@ const Handlekurv: React.FC = () => {
             </Link>
         </div>
     </div>
+    
     );
 };
 

@@ -1,6 +1,6 @@
 .navbar{
     width: 100%;
-    height: 50px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,7 +32,6 @@
 }
 
 .links-container a:hover{
-    background-color: #7DC23B;
+    border-bottom: black 2px solid;
     padding: 14px 16px;
-    border-radius: 10px;
 }

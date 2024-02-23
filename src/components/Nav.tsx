@@ -15,9 +15,11 @@ const Nav: React.FC<{}> = () => {
   const [cookies] = useCookies(['Fornavn']);
   const [cookie] = useCookies(['Ansatt']);
   const [cooki] = useCookies(['Loggedin']);
-  const username: string | undefined = cookies['Fornavn']; 
+  const [cookis] = useCookies(['Etternavn'])
+  const username: string | undefined = cookies['Fornavn'];
   const ansatt: string | undefined = cookie['Ansatt']; 
   const loggedin: string | undefined = cooki['Loggedin'];
+  const etternavn: string | undefined = cookis['Etternavn'];
 
   const renderUserInitial = () => {
     if (ansatt === 'yes') {
@@ -29,9 +31,10 @@ const Nav: React.FC<{}> = () => {
    } else {
     if (username) {
       const initial = username.charAt(0).toUpperCase();
+      const initial2 = etternavn?.charAt(0).toLocaleUpperCase();
       return (
         <div className={styles['user-initial']}>
-          <Link to="/MinSide"> {initial}</Link>
+          <Link to="/MinSide"> {initial}{initial2}</Link>
         </div>
       );
     } else {

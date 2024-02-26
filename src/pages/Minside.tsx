@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './MinSide.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 interface BestillData {
     bestillingsid: number;
@@ -16,8 +18,9 @@ interface BestillData {
 }
 
 const MinSide: React.FC = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState<BestillData[]>([]);
-    const [cookies] = useCookies(['Kundeid']);
+    const [cookies, setCookie, removeCookie] = useCookies(['Kundeid', 'Fornavn', 'Etternavn', 'Loggedin', 'Epost', 'Ansatt']);
 
     const getCustomerId = () => {
         const kundeid: string | undefined = cookies['Kundeid'];
@@ -46,8 +49,23 @@ const MinSide: React.FC = () => {
         return acc;
     }, {} as { [key: number]: BestillData[] });
 
+const logut = () => {
+    try{
+    removeCookie('Kundeid');
+    removeCookie('Fornavn');
+    removeCookie('Etternavn');
+    removeCookie('Loggedin');
+    removeCookie('Epost');
+    removeCookie('Ansatt');
+    navigate('/');
+    } catch {
+        toast.error('Noe gikk feil');
+    }
+}
+
     return (
         <div>
+            <button onClick={logut}>Log ut</button>
         <h2>Mine Bestillinger</h2>
         <div className="bestillinger-wrapper">
             {Object.values(groupedOrders).map((orders, index) => (

@@ -5,15 +5,15 @@ import path from 'path';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const LoginForm: React.FC = () => {
   const [userType, setUserType] = useState('user');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [error, setError] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
-  const [, setCookie] = useCookies(['Loggedin', 'Kundeid', 'Fornavn', 'Etternavn', 'Epost', 'Ansatt']);
+  const [useCookie, setCookie] = useCookies(['Loggedin', 'Kundeid', 'Fornavn', 'Etternavn', 'Epost', 'Ansatt']);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +47,7 @@ const LoginForm: React.FC = () => {
         setCookie('Etternavn', etternavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Epost', epost, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
+        toast.success('Logget in!');
         navigate('/');
       } catch (error) {
         setError('Invalid username or password');

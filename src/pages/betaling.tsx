@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './betaling.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 

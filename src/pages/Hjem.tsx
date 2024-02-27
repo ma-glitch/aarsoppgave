@@ -27,13 +27,13 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8000/server/tilbud.php')
+    axios.get('http://10.1.200.1.117/server/tilbud.php')
       .then(res => {
         setData(res.data);
       })
       .catch(err => console.log(err));
 
-    axios.get('http://localhost:8000/server/populare_produkter.php')
+    axios.get('http://10.200.1.117/server/populare_produkter.php')
       .then(res => {
         setPopularProducts(res.data);
       })
@@ -64,7 +64,7 @@ function Hjem() {
   const addToCart = (productId: number) => {
     const customerId = getCustomerId();
     if (customerId) {
-      axios.post('http://localhost:8000/server/legg_til_handlekurv.php', {
+      axios.post('http://10.200.1.117/server/legg_til_handlekurv.php', {
         customerId: customerId,
         productId: productId,
         quantity: 1,

@@ -70,13 +70,18 @@ const shippingpris = 0;
   };
 
   const gethandleItems = async () => {
+    if (loggedin === 'yes'){
     try {
       const customerId = cookiess['Kundeid'];
       const response = await axios.get(`http://10.200.1.117/server/vis_handle.php?customerId=${customerId}`);
       setData(response.data);
+      
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
+  } else{
+    return 0;
+  }
   };
 
   useEffect(() => {

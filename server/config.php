@@ -3,10 +3,10 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, Content-Type, Accept");
 
-$servername = "localhost";
+$servername = "10.200.1.117";
 $username = "root";
 $password = "Admin";
-$dbnavn = "SkoDex";
+$dbnavn = "skodex";
 
 
 $conn = new mysqli($servername, $username, $password, $dbnavn);

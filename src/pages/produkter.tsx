@@ -57,7 +57,7 @@ const Produkter: React.FC = () => {
   };
 
   const getPriceRange = (price: number, rabatt: number) => {
-    if (rabatt > 0) {
+    if (rabatt > 0.1) {
       const discountedPrice = Math.round(price * (1 - rabatt));
       if (discountedPrice <= 500) {
         return '0-500';

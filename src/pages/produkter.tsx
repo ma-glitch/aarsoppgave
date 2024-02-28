@@ -36,7 +36,7 @@ const Produkter: React.FC = () => {
     let filteredProducts = data;
 
     if (filters.price && filters.price.length > 0) {
-      filteredProducts = filteredProducts.filter(product => filters.price.includes(getPriceRange(product.pris)));
+      filteredProducts = filteredProducts.filter(product => filters.price.includes(getPriceRange(product)));
     }
 
     if (filters.color && filters.color.length > 0) {

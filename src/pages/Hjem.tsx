@@ -27,7 +27,7 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('http://10.1.200.1.117/server/tilbud.php')
+    axios.get('http://10.200.1.117/server/tilbud.php')
       .then(res => {
         setData(res.data);
       })

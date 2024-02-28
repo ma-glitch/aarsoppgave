@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
 
     if (userType === 'Kunde') {
       try {
-        const response = await axios.post('http://localhost:8000/server/login.php', {
+        const response = await axios.post('http://1.200.1.117/server/login.php', {
           username,
           password,
         });
@@ -48,13 +48,14 @@ const LoginForm: React.FC = () => {
         setCookie('Epost', epost, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         toast.success('Logget in!');
+        window.location.reload();
         navigate('/');
       } catch (error) {
         setError('Invalid username or password');
       }
     } else if (userType === 'Ansatt') {
       try {
-        const response = await axios.post('http://localhost:8000/server/login_ansatt.php', {
+        const response = await axios.post('http://1.200.1.117/server/login_ansatt.php', {
           username,
           password,
         });

@@ -48,7 +48,7 @@ const Betaling: React.FC = () => {
       try {
         const customerId = cookies['Kundeid'];
         const response = await axios.get(
-          `http://localhost:8000/server/vis_handle.php?customerId=${customerId}`
+          `http://1.200.1.117/server/vis_handle.php?customerId=${customerId}`
         );
         setData(response.data);
       } catch (error) {
@@ -91,7 +91,7 @@ const Betaling: React.FC = () => {
   const handleRemoveItem = (productId: number) => {
     const customerId = cookies['Kundeid'];
     axios
-      .post('http://localhost:8000/server/fjern_handle.php', {
+      .post('http://1.200.1.117/server/fjern_handle.php', {
         customerId: customerId,
         productId: productId,
       })
@@ -168,7 +168,7 @@ const Betaling: React.FC = () => {
         paymentvalg: selectedPaymentOption,
       };
       await axios.post(
-        'http://localhost:8000/server/betaling.php',
+        'http://10.200.1.117/server/betaling.php',
         orderData
       );
       navigate('/Takk');
@@ -180,14 +180,14 @@ const Betaling: React.FC = () => {
   const oppdaterAntall = (productId: number, newQuantity: number) => {
     const customerId = cookies['Kundeid'];
     axios
-      .post('http://localhost:8000/server/update_antall.php', {
+      .post('http://1.200.1.117/server/update_antall.php', {
         customerId: customerId,
         productId: productId,
         newQuantity: newQuantity,
       })
       .then((res) => {
         axios
-          .get('http://localhost:8000/server/vis_handle.php', {
+          .get('http://1.200.1.117/server/vis_handle.php', {
             params: {
               customerId: customerId,
             },

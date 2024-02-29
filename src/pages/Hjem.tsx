@@ -27,7 +27,7 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('C:/Apache24/htdocs/aarsoppgave/server/tilbud.php')
+    axios.get('https://10.200.1.117/server/tilbud.php')
       .then(res => {
         setData(res.data);
       })

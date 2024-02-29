@@ -27,13 +27,13 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('C:Apache24/htdocs/aarsoppgave/server/tilbud.php')
+    axios.get('C:/Apache24/htdocs/aarsoppgave/server/tilbud.php')
       .then(res => {
         setData(res.data);
       })
       .catch(err => console.log(err));
 
-    axios.get('/server/populare_produkter.php')
+    axios.get('C:/Apache24/htdocs/aarsoppgave//server/populare_produkter.php')
       .then(res => {
         setPopularProducts(res.data);
       })

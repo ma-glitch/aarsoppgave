@@ -27,13 +27,13 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('http://phplocal.com/server/tilbud.php')
+    axios.get('http://phplocal.com/tilbud.php')
       .then(res => {
         setData(res.data);
       })
       .catch(err => console.log(err));
 
-    axios.get('http://phplocal.com/server/populare_produkter.php')
+    axios.get('http://phplocal.com/populare_produkter.php')
       .then(res => {
         setPopularProducts(res.data);
       })

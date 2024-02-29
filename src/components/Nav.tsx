@@ -73,7 +73,7 @@ const shippingpris = 0;
     if (loggedin === 'yes'){
     try {
       const customerId = cookiess['Kundeid'];
-      const response = await axios.get(`http://10.200.1.117/server/vis_handle.php?customerId=${customerId}`);
+      const response = await axios.get(`/server/vis_handle.php?customerId=${customerId}`);
       setData(response.data);
       
     } catch (error) {

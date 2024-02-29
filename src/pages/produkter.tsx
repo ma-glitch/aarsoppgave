@@ -24,7 +24,7 @@ const Produkter: React.FC = () => {
   const [cookies] = useCookies(['Kundeid']);
 
   useEffect(() => {
-    axios.get('http://1.200.1.117/server/produkter.php')
+    axios.get('http://10.200.1.117/server/produkter.php')
       .then(res => {
         setData(res.data);
         setFilteredData(res.data);

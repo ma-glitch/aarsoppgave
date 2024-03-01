@@ -33,7 +33,7 @@ function Hjem() {
       })
       .catch(err => console.log(err));
 
-    axios.get('C:/Apache24/htdocs/aarsoppgave//server/populare_produkter.php')
+    axios.get('C:/Apache24/htdocs/aarsoppgave/server/populare_produkter.php')
       .then(res => {
         setPopularProducts(res.data);
       })

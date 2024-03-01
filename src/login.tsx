@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
 
     if (userType === 'Kunde') {
       try {
-        const response = await axios.post('http://1.200.1.117/server/login.php', {
+        const response = await axios.post('http://10.200.1.117:8000/login.php', {
           username,
           password,
         });
@@ -55,7 +55,7 @@ const LoginForm: React.FC = () => {
       }
     } else if (userType === 'Ansatt') {
       try {
-        const response = await axios.post('http://1.200.1.117/server/login_ansatt.php', {
+        const response = await axios.post('http://10.200.1.117:8000/login_ansatt.php', {
           username,
           password,
         });

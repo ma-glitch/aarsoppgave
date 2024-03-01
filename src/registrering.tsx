@@ -20,7 +20,7 @@ const RegistrationForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://10.200.1.117/server/registrer.php', {
+      const response = await axios.post('http://10.200.1.117:8000/registrer.php', {
       fornavn,  
       etternavn,
       username,

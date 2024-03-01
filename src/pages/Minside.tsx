@@ -29,7 +29,7 @@ const MinSide: React.FC = () => {
 
     useEffect(() => {
         const customerId = getCustomerId();
-        axios.get('http://10.200.1.117/server/bestillinger.php', {
+        axios.get('http://10.200.1.117:8000/bestillinger.php', {
             params: {
                 customerId: customerId,
             }

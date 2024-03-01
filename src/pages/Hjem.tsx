@@ -27,13 +27,13 @@ function Hjem() {
 
 
   useEffect(() => {
-    axios.get('https://10.200.1.117/server/tilbud.php')
+    axios.get('http://10.200.1.117:8000/tilbud.php')
       .then(res => {
         setData(res.data);
       })
       .catch(err => console.log(err));
 
-    axios.get('C:/Apache24/htdocs/aarsoppgave/server/populare_produkter.php')
+    axios.get('http://10.200.1.117:8000/populare_produkter.php')
       .then(res => {
         setPopularProducts(res.data);
       })
@@ -64,7 +64,7 @@ function Hjem() {
   const addToCart = (productId: number) => {
     const customerId = getCustomerId();
     if (customerId) {
-      axios.post('http://phplocal/server/legg_til_handlekurv.php', {
+      axios.post('http://10.200.1.117:8000/legg_til_handlekurv.php', {
         customerId: customerId,
         productId: productId,
         quantity: 1,
@@ -75,6 +75,7 @@ function Hjem() {
       .catch(err => console.log(err));
     } else {
       console.log('Customer ID not found.');
+      toast.error('Du må logge in for å legge ting i handlekurven')
     }
   };
 

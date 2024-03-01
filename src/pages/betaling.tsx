@@ -48,7 +48,7 @@ const Betaling: React.FC = () => {
       try {
         const customerId = cookies['Kundeid'];
         const response = await axios.get(
-          `http://1.200.1.117/server/vis_handle.php?customerId=${customerId}`
+          `http://10.200.1.117:8000/vis_handle.php?customerId=${customerId}`
         );
         setData(response.data);
       } catch (error) {
@@ -91,7 +91,7 @@ const Betaling: React.FC = () => {
   const handleRemoveItem = (productId: number) => {
     const customerId = cookies['Kundeid'];
     axios
-      .post('http://1.200.1.117/server/fjern_handle.php', {
+      .post('http://10.200.1.117:8000/fjern_handle.php', {
         customerId: customerId,
         productId: productId,
       })

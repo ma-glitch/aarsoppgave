@@ -24,7 +24,7 @@ const Produkter: React.FC = () => {
   const [cookies] = useCookies(['Kundeid']);
 
   useEffect(() => {
-    axios.get('http://10.200.1.117/server/produkter.php')
+    axios.get('http://10.200.1.117:8000/produkter.php')
       .then(res => {
         setData(res.data);
         setFilteredData(res.data);
@@ -98,7 +98,7 @@ const Produkter: React.FC = () => {
   const addToCart = (productId: number) => {
     const customerId = getCustomerId();
     if (customerId) {
-      axios.post('http://localhost:8000/server/legg_til_handlekurv.php', {
+      axios.post('http://10.200.1.117:8000/legg_til_handlekurv.php', {
         customerId: customerId,
         productId: productId,
         quantity: 1,

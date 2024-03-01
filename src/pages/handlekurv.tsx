@@ -24,7 +24,7 @@ const Handlekurv: React.FC = () => {
 
     useEffect(() => {
         const customerId = getCustomerId();
-        axios.get('http://10.200.1.117/server/handlekurv.php', {
+        axios.get('http://10.200.1.117:8000/handlekurv.php', {
             params: {
                 customerId: customerId,
             }
@@ -37,13 +37,13 @@ const Handlekurv: React.FC = () => {
 
     const updateQuantity = (productId: number, newQuantity: number) => {
         const customerId = getCustomerId();
-        axios.post('http://10.200.1.117/server/update_antall.php', {
+        axios.post('http://10.200.1.117:8000/update_antall.php', {
             customerId: customerId,
             productId: productId,
             newQuantity: newQuantity
         })
         .then(res => {
-            axios.get('http://10.200.1.117/server/handlekurv.php', {
+            axios.get('http://10.200.1.117:8000/handlekurv.php', {
                 params: {
                     customerId: customerId,
                 }
@@ -58,7 +58,7 @@ const Handlekurv: React.FC = () => {
 
     const removeItem = (productId: number) => {
         const customerId = getCustomerId();
-        axios.post('http://10.200.1.117/server/fjern_handle.php', {
+        axios.post('http://10.200.1.117:8000/fjern_handle.php', {
             customerId: customerId,
             productId: productId,
         })

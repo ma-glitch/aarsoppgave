@@ -48,7 +48,6 @@ const LoginForm: React.FC = () => {
         setCookie('Epost', epost, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         toast.success('Logget in!');
-        window.location.reload();
         navigate('/');
       } catch (error) {
         setError('Invalid username or password');

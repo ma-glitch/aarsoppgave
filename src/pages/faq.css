@@ -1,0 +1,48 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .søk {
+    width: 100%;
+    padding: 13px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+  }
+  
+  .svar {
+    margin-top: 20px;
+    border-bottom: #ccc 1px solid;
+  }
+
+  .svarwrapp{
+    width: 80%;
+  }
+  
+  .spor {
+    font-size: 18px;
+    cursor: pointer;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  .svarlist {
+    margin-top: 10px;
+    display: none;
+    width: 100%;
+  }
+  
+  .svarlist.vis {
+    display: block;
+  }
+  

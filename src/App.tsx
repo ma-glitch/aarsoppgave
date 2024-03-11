@@ -11,6 +11,7 @@ import Handlekurv from './pages/handlekurv';
 import Betaling from './pages/betaling';
 import Ansatt from './pages/Ansatt';
 import Takk from './pages/takk';
+import Support from './pages/faq';
 import {Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,6 +40,7 @@ const App: React.FC = () => {
         <Route path='/betaling' element={<Betaling/>} />
         <Route path='/Ansatt' element={<Ansatt/>} />
         <Route path='/Takk' element={<Takk />} />
+        <Route path='/Support' element={<Support />} />
       </Routes>
       
     </Router>

@@ -111,6 +111,9 @@ const shippingpris = 0;
             <Link to="/produkter">Produkter</Link>
           </div>
           <div className={styles['link']}>
+            <Link to="/Support">Support</Link>
+          </div>
+          <div className={styles['link']}>
             {renderUserInitial()}
           </div>
         </div>

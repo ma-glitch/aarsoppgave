@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
        
-        $sql = "SELECT * FROM ansatt WHERE brukernavn = ?";
+        $sql = "SELECT * FROM ansatt WHERE epost = ?";
         
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $username);
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->store_result();
 
                 if ($stmt->num_rows == 1) {
-                    $stmt->bind_result($kundeid, $fornavn, $etternavn, $epost, $brukernavn, $passord,);
+                    $stmt->bind_result($kundeid, $fornavn, $etternavn, $epost, $passord,);
 
                     if ($stmt->fetch()) {
                             

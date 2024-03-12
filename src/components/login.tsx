@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/login.css';
-import path from 'path';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -37,7 +36,6 @@ const LoginForm: React.FC = () => {
           username,
           password,
         });
-        console.log(response);
         const { kundeid, fornavn, etternavn, epost} = response.data;
         const ansatt = ' ';
         setResponseMessage(response.data.message);
@@ -47,7 +45,12 @@ const LoginForm: React.FC = () => {
         setCookie('Etternavn', etternavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Epost', epost, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
-        toast.success('Logget in!');
+        console.log(response);
+        if (response.data.success === true){
+         toast.success('Logget in!'); 
+        } else {
+          toast.error('Noe gikk galt');
+        }
         navigate('/');
       } catch (error) {
         setError('Invalid username or password');
@@ -81,7 +84,7 @@ const LoginForm: React.FC = () => {
       <form onSubmit={handleSubmit} className='loginform'>
         <input
           type="text"
-          placeholder="Brukernavn"
+          placeholder="Epost"
           name='username'
           value={username}
           onChange={handleUsernameChange}

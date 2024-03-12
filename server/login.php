@@ -28,38 +28,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
        
-        $sql = "SELECT * FROM kundeinfo WHERE brukernavn = ?";
-        
+        $sql = "SELECT * FROM kundeinfo WHERE epost = ? AND passord = ?";
+
         if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("ss", $username, $password);
             if ($stmt->execute()) {
-                $stmt->store_result();
-
-                if ($stmt->num_rows == 1) {
-                    $stmt->bind_result($kundeid, $fornavn, $etternavn, $epost, $brukernavn, $passord,);
-
-                    if ($stmt->fetch()) {
-                       
-                            
-
-                            echo json_encode(array(
-                                "kundeid" => $kundeid, 
-                                "fornavn" => $fornavn, 
-                                "etternavn" => $etternavn, 
-                                "epost" => $epost
-                                ));
-                            exit();
-                        }
-                    }
+                $result = $stmt->get_result();
+                if ($result->num_rows == 1) {
+                    $row = $result->fetch_assoc();
+                    echo json_encode([
+                        "success" => true,
+                        "kundeid" => $row['kundeid'], 
+                        "fornavn" => $row['fornavn'], 
+                        "etternavn" => $row['etternavn'], 
+                        "epost" => $row['epost']
+                    ]);
+                    exit();
                 } else {
-                    echo json_encode(["success" => false, "message" => "Fant ingen Brukere med det bruker navnet."]);
+                    echo json_encode(["success" => false, "message" => "Invalid email or password"]);
                     exit();
                 }
             } else {
-                echo json_encode(["success" => false, "message" => "Kunne ikke utføre spørringen."]);
+                echo json_encode(["success" => false, "message" => "Could not execute query"]);
                 exit();
             }
-
+        } else {
+            echo json_encode(["success" => false, "message" => "Could not prepare statement"]);
+            exit();
+        }
+        
             $stmt->close();
         } else {
             echo json_encode(["success" => false, "message" => "Kunne ikke forberede spørringen."]);

@@ -7,8 +7,6 @@ import { toast } from 'react-toastify';
 
 
 const RegistrationForm: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [registered, setRegistered] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fornavn, setFornavn] = useState('');
@@ -23,12 +21,11 @@ const RegistrationForm: React.FC = () => {
       const response = await axios.post('http://10.200.1.117:8000/registrer.php', {
       fornavn,  
       etternavn,
-      username,
       email,
-        password,
+      password,
       });
       setSuccessMessage(response.data.message);
-
+      console.log(response)
       toast.success("refistrering fullført");
       navigate('/LoginForm');
     } catch (error) {
@@ -36,9 +33,6 @@ const RegistrationForm: React.FC = () => {
     }
   };
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -70,12 +64,6 @@ const RegistrationForm: React.FC = () => {
           placeholder="Etternavn"
           value={etternavn}
           onChange={handleEtternavnChange}
-        />
-        <input
-          type="text"
-          placeholder="Brukernavn"
-          value={username}
-          onChange={handleUsernameChange}
         />
         <input
           type="email"

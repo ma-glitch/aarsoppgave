@@ -1,0 +1,17 @@
+{
+    "faqData": [
+      {
+        "Spørsmaal": "Hvordan logge in?",
+        "svar": "- I top menyen finner du en knapp som heter logg in.\n- Trykk på den.\n- Her skriver du in brukernavnet og passordet du lagde tidligere.\n- Deretter trykker du logg in.\n- Da skal du får opp en pop up som sier at du har blitt logget in"
+      },
+      {
+        "Spørsmaal": "How do I install React?",
+        "svar": "You can install React using npm or yarn."
+      },
+      {
+        "Spørsmaal": "What is JSX?",
+        "svar": "JSX is a syntax extension for JavaScript used with React to describe what the UI should look like."
+      }
+    ]
+  }
+  

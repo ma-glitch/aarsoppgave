@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
 import './faq.css';
-
-const faqData = [{ 
-    Spørsmaal: 'Hvordan logge in?', 
-    svar: '- I top menyen finner du en knapp som heter logg in. - Trykk på den. - Her skriver du in brukernavnet og passordet du lagde tidligere. - Deretter trykker du logg in. - Da skal du får opp en pop up som sier at du har blitt logget in' 
-    },
-    { 
-    Spørsmaal: 'How do I install React?', 
-    svar: 'You can install React using npm or yarn.' 
-    },
-    { 
-    Spørsmaal: 'What is JSX?', 
-    svar: 'JSX is a syntax extension for JavaScript used with React to describe what the UI should look like.' 
-    }];
+import faqData from '../data/faqData.json';
 
 const Support: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [expandedIndexes, setExpandedIndexes] = useState<number[]>([]);
 
-    const filteredFAQ = faqData.filter((faq) =>
+    const filteredFAQ = faqData.faqData.filter((faq) =>
         faq.Spørsmaal.toLowerCase().includes(searchQuery.toLowerCase())
     );
 

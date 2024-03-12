@@ -41,6 +41,10 @@
     display: none;
     width: 100%;
   }
+
+  .svarlist li{
+    margin: 5px;
+  }
   
   .svarlist.vis {
     display: block;

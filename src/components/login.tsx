@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './login.css';
+import '../styles/login.css';
 import path from 'path';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';

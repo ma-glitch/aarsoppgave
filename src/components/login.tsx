@@ -146,17 +146,24 @@ const LoginForm: React.FC = () => {
           <option value="Ansatt">Ansatt</option>
         </select>
         <button type="submit">Login</button>
-      </form>
+
       <GoogleOAuthProvider clientId="18167012444-lj0v8vjhph5q0dcrsj871nh497r9htvd.apps.googleusercontent.com">
+      <div className='googlebtn'>
       <GoogleLogin
             onSuccess={onSuccess}
             onError={onError}
-          />
-     </GoogleOAuthProvider>
+            theme='outline'
+            size='large'
+            text='signin_with'  
+      /></div>
+     </GoogleOAuthProvider>  
+      </form>
+      
       <p className='Ny'>Ny her?<Link to="/RegistrationForm" className='link'>Registrer deg nå</Link></p>
       {error && <div className='error'>{error}</div>}
       {responseMessage && <div className='response'>{responseMessage}</div>}
-          </div>
+        
+     </div>
   );
 };
 

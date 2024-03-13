@@ -6,9 +6,12 @@ import ReactDOM from 'react-dom';
 
 
 
+
+
 ReactDOM.render(
-  
-    <App />,
+    <React.StrictMode>
+            <App />
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

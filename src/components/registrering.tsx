@@ -25,11 +25,14 @@ const RegistrationForm: React.FC = () => {
       password,
       });
       setSuccessMessage(response.data.message);
-      console.log(response)
-      toast.success("refistrering fullført");
-      navigate('/LoginForm');
+      if (response.data.message === 'Username or email already exists'){
+        toast.error('Denne eposten er allerede i bruk');
+      } else{
+        toast.success("registrering fullført");
+        navigate('/LoginForm');
+      }
     } catch (error) {
-      setError('Failed to register. Please try again.');
+      toast.error('Noe gikk galt');
     }
   };
 

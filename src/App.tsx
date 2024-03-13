@@ -4,7 +4,6 @@ import Hjem from './pages/Hjem';
 import Produkter from './pages/produkter';
 import Nav from './components/Nav';
 import LoginForm from './components/login';
-import { useCookies } from 'react-cookie';
 import MinSide from './pages/Minside';
 import RegistrationForm from './components/registrering';
 import Handlekurv from './pages/handlekurv';
@@ -16,10 +15,9 @@ import {Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
-  const [cookies] = useCookies(['Fornavn']);
-  const username: string | undefined = cookies['Fornavn']; 
-
+  
   return (
+    <div>
     <Router>
       <ToastContainer position='top-center'
       limit={10}
@@ -44,6 +42,7 @@ const App: React.FC = () => {
       </Routes>
       
     </Router>
+</div>
   );
 }
 

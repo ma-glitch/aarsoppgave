@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import MinNav from './MinNav';
 
 interface BestillData {
     bestillingsid: number;
@@ -17,7 +18,7 @@ interface BestillData {
     etternavn: string;
 }
 
-const MinSide: React.FC = () => {
+const Bestillinger: React.FC = () => {
     const navigate = useNavigate();
     const [data, setData] = useState<BestillData[]>([]);
     const [cookies, setCookie, removeCookie] = useCookies(['Kundeid', 'Fornavn', 'Etternavn', 'Loggedin', 'Epost', 'Ansatt']);
@@ -49,23 +50,10 @@ const MinSide: React.FC = () => {
         return acc;
     }, {} as { [key: number]: BestillData[] });
 
-const logut = () => {
-    try{
-    removeCookie('Kundeid');
-    removeCookie('Fornavn');
-    removeCookie('Etternavn');
-    removeCookie('Loggedin');
-    removeCookie('Epost');
-    removeCookie('Ansatt');
-    navigate('/');
-    } catch {
-        toast.error('Noe gikk feil');
-    }
-}
 
     return (
         <div>
-            <button onClick={logut}>Log ut</button>
+            <MinNav />
         <h2>Mine Bestillinger</h2>
         <div className="bestillinger-wrapper">
             {Object.values(groupedOrders).map((orders, index) => (
@@ -106,4 +94,4 @@ const logut = () => {
     );
 }
 
-export default MinSide;
+export default Bestillinger;

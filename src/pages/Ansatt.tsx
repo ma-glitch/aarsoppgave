@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './MinSide.css';
+import './MinSide/MinSide.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 

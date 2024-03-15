@@ -47,7 +47,7 @@ const Nav: React.FC<{}> = () => {
         const initial2 = etternavn?.charAt(0).toLocaleUpperCase();
         return (
           <div className={styles['user-initial']}>
-            <Link to="/MinSide"> {initial}{initial2}</Link>
+            <Link to="/Innstillinger"> {initial}{initial2}</Link>
           </div>
         );
       }

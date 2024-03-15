@@ -14,7 +14,7 @@ $kundeid = $data->kundeid;
 
 
 $stmt = $conn->prepare("UPDATE kundeinfo SET passord = ? WHERE kundeid = ?");
-$stmt->bind_param("iii", $newPassword, $kundeid);
+$stmt->bind_param("ii", $newPassword, $kundeid);
 
 if ($stmt->execute()) {
     $response = array(

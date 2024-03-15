@@ -14,17 +14,17 @@ $kundeid = $data->kundeid;
 
 
 $stmt = $conn->prepare("UPDATE kundeinfo SET passord = ? WHERE kundeid = ?");
-$stmt->bind_param("ii", $newPassword, $kundeid);
+$stmt->bind_param("si", $newPassword, $kundeid);
 
 if ($stmt->execute()) {
     $response = array(
         'success' => true,
-        'message' => 'Quantity updated successfully.'
+        'message' => 'Passord updated successfully.'
     );
 } else {
     $response = array(
         'success' => false,
-        'message' => 'Failed to update quantity.'
+        'message' => 'Failed to update Passord.'
     );
 }
 

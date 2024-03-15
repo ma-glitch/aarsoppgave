@@ -22,7 +22,7 @@ $etternavn = mysqli_real_escape_string($conn, trim($data->etternavn));
 $email = mysqli_real_escape_string($conn, trim($data->email));
 $password = mysqli_real_escape_string($conn, trim($data->password));
 
-// Check if the username or email already exists
+
 $sql = "SELECT * FROM kundeinfo WHERE epost = '$email'";
 $result = mysqli_query($conn, $sql);
 
@@ -31,10 +31,10 @@ if (mysqli_num_rows($result) > 0) {
     exit();
 }
 
-// Hash the password
+
 $hashed_password = ($password);
 
-// Insert the user into the database
+
 $insert_query = "INSERT INTO kundeinfo (fornavn, etternavn, epost, passord) VALUES ('$fornavn', '$etternavn', '$email', '$hashed_password')";
 if (mysqli_query($conn, $insert_query)) {
     echo json_encode(["success" => true, "message" => "User registered successfully"]);

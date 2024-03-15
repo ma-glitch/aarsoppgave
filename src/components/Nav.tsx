@@ -35,6 +35,14 @@ const Nav: React.FC<{}> = () => {
       );
     } else {
       if (username) {
+        if (etternavn === 'default') {
+          const initial = username.charAt(0).toUpperCase();
+        return (
+          <div className={styles['user-initial']}>
+            <Link to="/MinSide"> {initial}</Link>
+          </div>
+        );
+        } else {
         const initial = username.charAt(0).toUpperCase();
         const initial2 = etternavn?.charAt(0).toLocaleUpperCase();
         return (
@@ -42,6 +50,7 @@ const Nav: React.FC<{}> = () => {
             <Link to="/MinSide"> {initial}{initial2}</Link>
           </div>
         );
+      }
       } else {
         return (
           <div className={styles['login-text']}>

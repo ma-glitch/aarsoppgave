@@ -5,9 +5,10 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { GoogleLogin } from '@react-oauth/google';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import {auth, provider} from './firebase';
+
 
 
 
@@ -37,6 +38,7 @@ const LoginForm: React.FC = () => {
 
    if (userType === 'Kunde') {
       try {
+        const userCredential = await signInWithEmailAndPassword(auth, username, password);
         const response = await axios.post('http://10.200.1.117:8000/login.php', {
           username,
           password,
@@ -52,10 +54,12 @@ const LoginForm: React.FC = () => {
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         console.log(response);
         if (response.data.success === true){
+          
          toast.success('Logget in!'); 
         } else {
           toast.error('Noe gikk galt');
         }
+        const user = userCredential.user;
         navigate('/');
       } catch (error) {
         toast.error('Feil Epost eller Passord!')
@@ -83,45 +87,56 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const onSuccess = async (credentialResponse: any) => {
-    const idToken = credentialResponse?.credential;
-
-    if (typeof idToken === 'string' && idToken.length > 0) {
-      const decodedToken: any = jwtDecode(idToken);
-      console.log(decodedToken)
-
-      const email = decodedToken?.email
-
-      try {
-        const response = await axios.post('http://10.200.1.117:8000/login_google.php', {
-          username: email,
-          password: 'google',
-        });
-        const { kundeid, fornavn, etternavn, epost} = response.data;
-        const ansatt = ' ';
-        setResponseMessage(response.data.message);
+  const handleGoogleSignIn = async () => {
+    try {
+      
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+  
+      
+      const email = user.email;
+      let fornavn = '';
+      let etternavn = '';
+    
+     
+      if (user.displayName) {
+        const displayNameParts = user.displayName.split(' ');
+        fornavn = displayNameParts[0];
+        etternavn = displayNameParts.slice(1).join(' ');
+      }
+  
+      
+      const response = await axios.post('http://10.200.1.117:8000/login.php', {
+        username: email, 
+        password: 'google', 
+      });
+  
+      
+      setResponseMessage(response.data.message);
+      if (response.data.success === true) {
+        
+        const { kundeid, fornavn, etternavn, epost } = response.data;
+        const ansatt = '';
         setCookie('Loggedin', 'yes', { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Kundeid', kundeid, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Fornavn', fornavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Etternavn', etternavn, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Epost', epost, { path: '/', maxAge: 30 * 24 * 60 * 60 });
         setCookie('Ansatt', ansatt, { path: '/', maxAge: 30 * 24 * 60 * 60 });
-        console.log(response);
-        if (response.data.success === true){
-         toast.success('Logget in!'); 
-        } else {
-          toast.error('Noe gikk galt');
-        }
+  
+        toast.success('Logget in!');
         navigate('/');
-      } catch (error) {
-        toast.error('Feil Epost eller Passord!')
+      } else {
+      
+        toast.error('Noe gikk galt');
       }
-    };
+    } catch (error) {
+      console.error(error);
+      toast.error('Noe gikk galt');
+    }
   };
   
-  const onError = () => {
-    console.log('Login Failed');
-  };
+  
 
   return (
     <div className="container">
@@ -145,20 +160,9 @@ const LoginForm: React.FC = () => {
           <option value="Kunde">Kunde</option>
           <option value="Ansatt">Ansatt</option>
         </select>
-        <button type="submit">Login</button>
-
-      <GoogleOAuthProvider clientId="18167012444-lj0v8vjhph5q0dcrsj871nh497r9htvd.apps.googleusercontent.com">
-      <div className='googlebtn'>
-      <GoogleLogin
-            onSuccess={onSuccess}
-            onError={onError}
-            theme='outline'
-            size='large'
-            text='signin_with'  
-      /></div>
-     </GoogleOAuthProvider>  
+        <button type="submit">Login</button>  
       </form>
-      
+      <button className="google-signin-button" onClick={handleGoogleSignIn}>Log på med google</button>
       <p className='Ny'>Ny her?<Link to="/RegistrationForm" className='link'>Registrer deg nå</Link></p>
       {error && <div className='error'>{error}</div>}
       {responseMessage && <div className='response'>{responseMessage}</div>}

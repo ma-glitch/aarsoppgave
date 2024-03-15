@@ -31,12 +31,21 @@ const Innstillinger: React.FC = () => {
     }, [cookies]);
 
     const handleUpdateEmail = async () => {
+        const kundeid = cookies['Kundeid'];
         try {
             await updateEmail(auth.currentUser!, newEmail);
-            toast.success('Eposten ble oppdatert.');
+            const response = await axios.post('http://10.200.1.117:8000/update_passord.php', {
+                newEmail: newEmail,
+                kundeid: kundeid,
+            });
+            if (response.data.success) {
+                toast.success('Passordet ble oppdatert.');
+            } else {
+                toast.error('Noe gikk galt ved oppdatering av passord.');
+            }
         } catch (error) {
-            console.error('Error updating email:', error);
-            toast.error('Noe gikk galt ved oppdatering av e-post.');
+            console.error('Error updating password:', error);
+            toast.error('Noe gikk galt ved oppdatering av database.');
         }
     };
 

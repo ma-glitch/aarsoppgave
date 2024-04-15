@@ -8,15 +8,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
   
   .links-right {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   
   .logo-container {
-    margin-left: 20px;
+    width: 100%;
   }
   
   .logo-container img {
@@ -25,14 +28,9 @@
   }
   
   .links-container {
-    margin-right: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  
-  .links-right {
-    margin-left: 20px;
+    justify-content: space-evenly;
   }
   
   .links-container a {

@@ -8,19 +8,20 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once('config.php');
 
 
-$data = json_decode(file_get_contents("php://input"));
+$json_data = file_get_contents("php://input");
+$data = json_decode($json_data, true);
 
 
-if (!isset($data->fornavn) || !isset($data->etternavn) || !isset($data->email) || !isset($data->password)) {
+if (!isset($data['fornavn']) || !isset($data['etternavn']) || !isset($data['email']) || !isset($data['password'])) {
     echo json_encode(["success" => false, "message" => "Missing required fields"]);
     exit();
 }
 
 
-$fornavn = mysqli_real_escape_string($conn, trim($data->fornavn));
-$etternavn = mysqli_real_escape_string($conn, trim($data->etternavn));
-$email = mysqli_real_escape_string($conn, trim($data->email));
-$password = mysqli_real_escape_string($conn, trim($data->password));
+$fornavn = $data['fornavn'];
+$etternavn = $data['etternavn'];
+$email = $data['email'];
+$password = $data['password'];
 
 
 $sql = "SELECT * FROM kundeinfo WHERE epost = '$email'";
@@ -32,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
-$hashed_password = ($password);
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
 $insert_query = "INSERT INTO kundeinfo (fornavn, etternavn, epost, passord) VALUES ('$fornavn', '$etternavn', '$email', '$hashed_password')";

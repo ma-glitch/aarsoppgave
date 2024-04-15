@@ -33,7 +33,7 @@ const Innstillinger: React.FC = () => {
     const handleUpdateEmail = async () => {
         const kundeid = cookies['Kundeid'];
         try {
-            const firesvar = await updateEmail(auth.currentUser!, newEmail);
+            await updateEmail(auth.currentUser!, newEmail);
             
             const response = await axios.post('http://10.200.1.117:8000/update_passord.php', {
                 newEmail: newEmail,

@@ -90,7 +90,7 @@ function Hjem() {
 
   return (
     <div>
-      <div className="banner">
+      <div className="banner"> 
         <h1>Velkommen til SkoDex!</h1>
         <p>Find de perfekte skoende for deg</p>
       </div>

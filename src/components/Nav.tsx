@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import { useCookies } from 'react-cookie';
-import logo from '../assets/png/logowhite_green.png';
+import logo from '../assets/png/logoblack_green.png';
 import { useNavigate } from 'react-router-dom';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -93,9 +93,7 @@ const shippingpris = 0;
   }
   };
 
-  useEffect(() => {
-    gethandleItems();
-  }, [cookiess]);
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {

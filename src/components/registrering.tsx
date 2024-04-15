@@ -38,9 +38,11 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       setSuccessMessage(response.data.message);
       if (response.data.message === 'Username or email already exists') {
         toast.error('Denne eposten er allerede i bruk');
-      } else {
-        toast.success('Registrering fullført. Sjekk e-posten din for å bekrefte registreringen.');
+      } else if (response.data.success === true) {
+        toast.success('Registrering fullført.');
         navigate('/LoginForm');
+      } else {
+        toast.error('Noe gikk galt.');
       }
     } else {
       toast.error('Noe gikk galt. Prøv igjen senere.');

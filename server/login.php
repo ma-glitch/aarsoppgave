@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $stmt->get_result();
                 if ($result->num_rows == 1) {
                     $row = $result->fetch_assoc();
+                if (password_verify($password, $row['passord'])){
                     echo json_encode([
                         "success" => true,
                         "kundeid" => $row['kundeid'], 
@@ -44,6 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "epost" => $row['epost']
                     ]);
                     exit();
+                } else {
+                    echo json_encode(["success" => false, "message" => "Invalid password"]);
+                    exit();
+                }   
                 } else {
                     echo json_encode(["success" => false, "message" => "Invalid email or password"]);
                     exit();

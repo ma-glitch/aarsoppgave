@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
        
-        $sql = "SELECT * FROM kundeinfo WHERE epost = ? AND passord = ?";
+        $sql = "SELECT * FROM kundeinfo WHERE epost = ?";
 
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("ss", $username, $password);

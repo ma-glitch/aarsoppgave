@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT * FROM kundeinfo WHERE epost = ?";
 
         if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("ss", $username, $password);
+            $stmt->bind_param("s", $username);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
                 if ($result->num_rows == 1) {
@@ -39,9 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $row['passord'])){
                     echo json_encode([
                         "success" => true,
-                        "kundeid" => $row['kundeid'], 
-                        "fornavn" => $row['fornavn'], 
-                        "etternavn" => $row['etternavn'], 
+                        "kundeid" => $row['kundeid'],
+                        "fornavn" => $row['fornavn'],
+                        "etternavn" => $row['etternavn'],
                         "epost" => $row['epost']
                     ]);
                     exit();

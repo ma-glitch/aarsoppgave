@@ -35,7 +35,8 @@ if ($stmt->num_rows() > 0) {
     }
 } else {
 $stmt = $conn->prepare("INSERT INTO handlekurv (kundeid, produktid, antall) VALUES (?, ?, ?)");
-if ($stmt->execute([$customerId, $productId, $quantity])) {
+$stmt->bind_param("iii", $customerId, $productId, $newQuantity);
+if ($stmt->execute()) {
     $response = array(
         'success' => true,
         'message' => 'Item added to cart successfully.'

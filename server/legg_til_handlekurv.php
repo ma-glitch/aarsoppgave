@@ -74,12 +74,10 @@ if ($stmt3->num_rows() > 0) {
     }
 }
 
-// Close database connection
+
 $stmt3->close();
-$stmt->close();
 $stmt2->close();
 $conn->close();
 
-// Send JSON response
 echo json_encode($response);
 ?>

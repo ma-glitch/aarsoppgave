@@ -34,7 +34,7 @@ if ($stmt3->num_rows() > 0) {
         );
     }
 } else {
-$stmt2 = $conn->prepare("INSERT INTO handlekurv (kundeid, produktid, antall) VALUES ($customerId, $productId, $quantity)");
+$stmt2 = $conn->prepare("INSERT INTO handlekurv (kundeid, produktid, antall) VALUES (" . $customerId . ", " . $productId . ", " . $quantity . ")");
 if ($stmt2->execute()) {
     $response = array(
         'success' => true,

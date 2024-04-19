@@ -76,7 +76,6 @@ if ($stmt3->num_rows() > 0) {
 
 
 $stmt3->close();
-$stmt2->close();
 $conn->close();
 
 echo json_encode($response);

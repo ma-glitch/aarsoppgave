@@ -62,7 +62,7 @@ function Hjem() {
   };
 
   const addToCart = (productId: number) => {
-    const customerId = getCustomerId();
+    const customerId = cookies['Kundeid'];
     if (customerId) {
       axios.post('http://10.200.1.117:8000/legg_til_handlekurv.php', {
         customerId: customerId,

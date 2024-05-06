@@ -10,7 +10,7 @@ FROM bestilling
 INNER JOIN produkt_i_bestilling ON bestilling.bestillingsid = produkt_i_bestilling.bestillingsid
 INNER JOIN produkt ON produkt_i_bestilling.produktid = produkt.produktid
 INNER JOIN kundeinfo ON bestilling.kundeid = kundeinfo.kundeid
-WHERE kundeinfo.kundeid =?");
+");
 $stmt->execute();
 $result = $stmt->get_result();
 

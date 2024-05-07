@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import "./admin.css";
+import { useNavigate } from 'react-router-dom';
 
 interface BestillData {
     bestillingsid: number;
@@ -17,6 +18,7 @@ interface BestillData {
 }
 
 const Ansatt: React.FC = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState<BestillData[]>([]);
     const [cookies, setCookie, removeCookie] = useCookies(['Kundeid', 'Fornavn', 'Etternavn', 'Loggedin', 'Epost', 'Ansatt']);
 
@@ -37,6 +39,21 @@ const Ansatt: React.FC = () => {
         acc[key].push(order);
         return acc;
     }, {} as { [key: number]: BestillData[] });
+
+
+    const logut = () => {
+        try{
+        removeCookie('Kundeid');
+        removeCookie('Fornavn');
+        removeCookie('Etternavn');
+        removeCookie('Loggedin');
+        removeCookie('Epost');
+        removeCookie('Ansatt');
+        navigate('/');
+        } catch {
+            toast.error('Noe gikk feil');
+        }
+    }
 
 
     return (
@@ -76,6 +93,7 @@ const Ansatt: React.FC = () => {
                 </div>
             ))}
         </div>
+        <button onClick={logut} className="Logut">Log ut</button>
     </div>
     
     );

@@ -30,7 +30,7 @@ const Nav: React.FC<{}> = () => {
     if (ansatt === 'yes') {
       return (
         <div>
-          <Link to="/Ansatt">Ansatt</Link>
+          <Link to="/Ansatt">Ansatt Panel</Link>
         </div>
       );
     } else {
@@ -41,8 +41,8 @@ const Nav: React.FC<{}> = () => {
           <div className={styles['user-initial']}>
             <Link to="/MinSide"> {initial}</Link>
           </div>
-        );
-        } else {
+        ); 
+      } else {
         const initial = username.charAt(0).toUpperCase();
         const initial2 = etternavn?.charAt(0).toLocaleUpperCase();
         return (

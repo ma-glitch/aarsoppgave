@@ -90,12 +90,12 @@ const Innstillinger: React.FC = () => {
             <MinNav />
             <h1>Innstillinger</h1>
         <div className="Innstillinger-wrapper">
-        <div>
+                <div className="emailwrapper">
                     <label htmlFor="newEmail">Ny Epost:</label>
                     <input type="email" id="newEmail" value={newEmail} onChange={handleEmailChange}  placeholder={currentUserEmail} />
                     <button onClick={handleUpdateEmail}>Oppdater Epost</button>
                 </div>
-                <div>
+                <div className="passwordwrapper ">
                     <label htmlFor="newPassword">Nytt Passord:</label>
                     <input type="password" id="newPassword" value={newPassword} onChange={handlePasswordChange} />
                     <button onClick={handleUpdatePassword}>Oppdater Passord</button>

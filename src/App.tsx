@@ -7,7 +7,7 @@ import LoginForm from './components/login';
 import RegistrationForm from './components/registrering';
 import Handlekurv from './pages/handlekurv';
 import Betaling from './pages/betaling';
-import Ansatt from './pages/Ansatt';
+import Ansatt from './pages/Admin/index';
 import Takk from './pages/takk';
 import Support from './pages/faq';
 import Bestillinger from './pages/MinSide/bestillinger';

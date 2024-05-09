@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './MinSide.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
+import "./admin.css";
 import { useNavigate } from 'react-router-dom';
-import MinNav from './MinNav';
 
 interface BestillData {
     bestillingsid: number;
@@ -18,22 +17,13 @@ interface BestillData {
     etternavn: string;
 }
 
-const Bestillinger: React.FC = () => {
+const Ansatt: React.FC = () => {
     const navigate = useNavigate();
     const [data, setData] = useState<BestillData[]>([]);
     const [cookies, setCookie, removeCookie] = useCookies(['Kundeid', 'Fornavn', 'Etternavn', 'Loggedin', 'Epost', 'Ansatt']);
 
-    const getCustomerId = () => {
-        const kundeid: string | undefined = cookies['Kundeid'];
-        return kundeid;
-    };
-
     useEffect(() => {
-        const customerId = getCustomerId();
-        axios.get('http://10.200.1.117:8000/bestillinger.php', {
-            params: {
-                customerId: customerId,
-            }
+        axios.get('http://10.200.1.117:8000/admin.php', {
         })
             .then(res => {
                 setData(res.data);
@@ -51,10 +41,24 @@ const Bestillinger: React.FC = () => {
     }, {} as { [key: number]: BestillData[] });
 
 
+    const logut = () => {
+        try{
+        removeCookie('Kundeid');
+        removeCookie('Fornavn');
+        removeCookie('Etternavn');
+        removeCookie('Loggedin');
+        removeCookie('Epost');
+        removeCookie('Ansatt');
+        navigate('/');
+        } catch {
+            toast.error('Noe gikk feil');
+        }
+    }
+
+
     return (
         <div>
-            <MinNav />
-        <h2 className='Bestill-header'>Mine Bestillinger</h2>
+        <h2 className='Bestill-header'>Bestillinger</h2>
         <div className="bestillinger-wrapper">
             {Object.values(groupedOrders).map((orders, index) => (
                 <div key={index} className="ordre">
@@ -89,9 +93,10 @@ const Bestillinger: React.FC = () => {
                 </div>
             ))}
         </div>
+        <button onClick={logut} className="Logut">Log ut</button>
     </div>
     
     );
 }
 
-export default Bestillinger;
+export default Ansatt;

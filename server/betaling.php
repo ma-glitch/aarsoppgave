@@ -23,10 +23,10 @@ if(empty($request_body)) {
     exit();
 }
 
-// Decode JSON data
+
 $data = json_decode($request_body, true);
 
-// Check if all required fields are present in the JSON data
+
 if (!isset($data['customerId']) || !isset($data['shippingAddress']) || !isset($data['products']) || !isset($data['shippingOption'])) {
     $response = array(
         'success' => false,
@@ -36,20 +36,20 @@ if (!isset($data['customerId']) || !isset($data['shippingAddress']) || !isset($d
     exit();
 }
 
-// Extract data from JSON object
+
 $customerId = $data['customerId'];
 $shippingAddress = $data['shippingAddress'];
 $products = $data['products'];
 $shippingOption = $data['shippingOption'];
 
-// Prepare and execute INSERT statement to add order details to the database
+
 $stmt = $conn->prepare("INSERT INTO bestilling (dato, levering_adresse, kundeid) VALUES (NOW(), ?, ?)");
 $stmt->bind_param("ss", $shippingAddress, $customerId);
 $stmt->execute();
 $order_id = $stmt->insert_id;
 $stmt->close();
 
-// Iterate over products and insert them into the order details table
+
 foreach ($products as $product) {
     $stmt = $conn->prepare("INSERT INTO produkt_i_bestilling (produktid, bestillingsid, antall) VALUES (?, ?, ?)");
     $stmt->bind_param("iii", $product['produktid'], $order_id, $product['antall']);
@@ -57,7 +57,7 @@ foreach ($products as $product) {
     $stmt->close();
 }
 
-// Retrieve customer's email and name
+
 $stmt = $conn->prepare("SELECT epost, fornavn, etternavn FROM kundeinfo WHERE kundeid = ?");
 $stmt->bind_param("i", $customerId);
 $stmt->execute();
@@ -67,7 +67,7 @@ if ($result->num_rows == 1) {
     $epost = $row['epost'];
     $navn = $row['fornavn'] . ' ' . $row['etternavn'];
 
-    // Send email confirmation
+
     $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
@@ -96,16 +96,16 @@ if ($result->num_rows == 1) {
     $mail->send();
 }
 
-// Delete items from the shopping cart
+
 $stmt = $conn->prepare("DELETE FROM handlekurv WHERE kundeid = ?");
 $stmt->bind_param("i", $customerId);
 $stmt->execute();
 $stmt->close();
 
-// Close database connection
+
 $conn->close();
 
-// Send JSON response
+
 $response = array(
     'success' => true,
     'message' => 'Order placed successfully.'

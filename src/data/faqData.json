@@ -5,12 +5,12 @@
         "svar": "- I top menyen finner du en knapp som heter logg in.\n- Trykk på den.\n- Her skriver du in brukernavnet og passordet du lagde tidligere.\n- Deretter trykker du logg in.\n- Da skal du får opp en pop up som sier at du har blitt logget in"
       },
       {
-        "Spørsmaal": "How do I install React?",
-        "svar": "You can install React using npm or yarn."
+        "Spørsmaal": "Hvordan registrerer jeg meg?",
+        "svar": "- I top menyen finner du en knapp som heter logg in.\n- Trykk på den.\n- Her skal du finne end ny knapp i under login knappen.\n- Trykk på den.\n- På den nye siden skal du skrive inn informasjonne den ber og og trykke registrer. \n- Da skal du få opp en pop up som sier at du har blitt registrert"
       },
       {
-        "Spørsmaal": "What is JSX?",
-        "svar": "JSX is a syntax extension for JavaScript used with React to describe what the UI should look like."
+        "Spørsmaal": "Hvordan bestille et produkt?",
+        "svar": "- I top menyen finner du en knapp som heter produkter.\n- Trykk på den.\n- Du skal bli sendt videre til en side som viser alle produkter.\n- På venstre side er den en sidemeny som har sortering knapper som merke, pris og kjønn.\n- Når du finner riktig sko for deg er det en stor grønn knapp på produktet som heter legg til handlekruv\n- Når du har trykker på den kommer det opp en medling som sier Lagt til handlekurven.\n- Får å bestille trykker du på handlenettet i top høyre hjørne.\n- I handlekurven er det en knapp som sier betaling trykk på den og fyll ut informasjonen."
       }
     ]
   }

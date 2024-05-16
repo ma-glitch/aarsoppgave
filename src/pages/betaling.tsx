@@ -360,7 +360,7 @@ const Betaling: React.FC = () => {
                 handlePaymentMethodChange({ id: 2, name: 'vipps' }, e)
               }
             />
-            PayPal
+            Vipps
           </label>
           {selectedPaymentOption?.id === 2 && (
             <input

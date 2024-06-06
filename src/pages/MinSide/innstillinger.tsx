@@ -78,7 +78,6 @@ const Innstillinger: React.FC = () => {
 const handleUpdateFornavn = async () => {
         const kundeid = cookies['Kundeid'];
         try {
-            await updatePassword(auth.currentUser!, newfornavn);
             const response = await axios.post('http://10.200.1.117:8000/update_name.php', {
                 newfornavn: newfornavn,
                 kundeid: kundeid,
@@ -90,6 +89,7 @@ const handleUpdateFornavn = async () => {
             }
         } catch (error) {
             console.error('Error updating password:', error);
+            console.log(newfornavn);
             toast.error('Noe gikk galt ved oppdatering av database.');
         }
     };
@@ -125,9 +125,9 @@ const handleUpdateFornavn = async () => {
                     <button onClick={handleUpdatePassword}>Oppdater Passord</button>
                 </div>
                 <div className="passwordwrapper ">
-                    <label htmlFor="newfornavn">Nytt Passord:</label>
+                    <label htmlFor="newfornavn">Nytt fornavn:</label>
                     <input type="password" id="newfornavn" value={newfornavn} onChange={handleFornavnChange} />
-                    <button onClick={handleUpdateFornavn}>Oppdater Passord</button>
+                    <button onClick={handleUpdateFornavn}>Oppdater fornavn</button>
                 </div>
             
         </div>

@@ -15,6 +15,7 @@ const Innstillinger: React.FC = () => {
     const [currentUserEmail, setCurrentUserEmail] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [newfornavn, setNewFornavn] = useState('');
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewEmail(event.target.value);
@@ -22,6 +23,10 @@ const Innstillinger: React.FC = () => {
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewPassword(event.target.value);
+    };
+
+    const handleFornavnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewFornavn(event.target.value);
     };
 
     useEffect(() => {
@@ -70,6 +75,25 @@ const Innstillinger: React.FC = () => {
     };
 
 
+const handleUpdateFornavn = async () => {
+        const kundeid = cookies['Kundeid'];
+        try {
+            await updatePassword(auth.currentUser!, newfornavn);
+            const response = await axios.post('http://10.200.1.117:8000/update_name.php', {
+                newfornavn: newfornavn,
+                kundeid: kundeid,
+            });
+            if (response.data.success) {
+                toast.success('Passordet ble oppdatert.');
+            } else {
+                toast.error('Noe gikk galt ved oppdatering av passord.');
+            }
+        } catch (error) {
+            console.error('Error updating password:', error);
+            toast.error('Noe gikk galt ved oppdatering av database.');
+        }
+    };
+
     const logut = () => {
         try{
         removeCookie('Kundeid');
@@ -99,6 +123,11 @@ const Innstillinger: React.FC = () => {
                     <label htmlFor="newPassword">Nytt Passord:</label>
                     <input type="password" id="newPassword" value={newPassword} onChange={handlePasswordChange} />
                     <button onClick={handleUpdatePassword}>Oppdater Passord</button>
+                </div>
+                <div className="passwordwrapper ">
+                    <label htmlFor="newfornavn">Nytt Passord:</label>
+                    <input type="password" id="newfornavn" value={newfornavn} onChange={handleFornavnChange} />
+                    <button onClick={handleUpdateFornavn}>Oppdater Passord</button>
                 </div>
             
         </div>
